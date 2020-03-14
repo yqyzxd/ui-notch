@@ -1,0 +1,4 @@
+rootProject.name='ui-notch'
+include ':app'
+include ':rom-detector'
+include ':notch'
