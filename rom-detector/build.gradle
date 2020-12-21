@@ -1,5 +1,5 @@
 apply plugin: 'com.android.library'
-
+apply plugin: 'com.novoda.bintray-release'
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
@@ -29,4 +29,14 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+}
+publish {
+    artifactId = 'rom-detector'
+    userOrg = rootProject.userOrg
+    groupId = rootProject.groupId
+    uploadName = 'rom-detector'
+    publishVersion = rootProject.publishVersion
+    desc = 'detect rom'
+    website = rootProject.website
+    licences = rootProject.licences
 }

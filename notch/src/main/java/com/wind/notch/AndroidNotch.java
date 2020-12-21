@@ -12,6 +12,8 @@ import android.view.WindowInsets;
  * on 2020/3/14
  *
  * android P 才支持 刘海接口
+ *
+ * 不能直接在 @link{android.app.Activity}的 onCreate里直接调用，因此此时还未进行布局，无法获得WindowInsets；如需则用post
  */
 class AndroidNotch implements Notchable{
     @Override
@@ -20,6 +22,7 @@ class AndroidNotch implements Notchable{
             Window window=activity.getWindow();
             DisplayCutout displayCutout;
             View rootView = window.getDecorView();
+
             WindowInsets insets = rootView.getRootWindowInsets();
             if (insets != null) {
                 displayCutout = insets.getDisplayCutout();
@@ -35,8 +38,5 @@ class AndroidNotch implements Notchable{
         return false;
     }
 
-    @Override
-    public int getNotchHeight(Activity activity) {
-        return 0;
-    }
+
 }

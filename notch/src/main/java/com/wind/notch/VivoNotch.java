@@ -17,7 +17,7 @@ class VivoNotch extends AndroidNotch {
     private static final int VIVO_MASK_ROUND_CORNERS = 0x00000008;//是否有圆角
     @Override
     public boolean isNotch(Activity activity) {
-        boolean notch = false;
+        boolean notch;
         try {
             ClassLoader classLoader = activity.getClassLoader();
             Class FtFeature = classLoader.loadClass("android.util.FtFeature");
@@ -28,6 +28,8 @@ class VivoNotch extends AndroidNotch {
         }
         return notch;
     }
+
+
 
 
 

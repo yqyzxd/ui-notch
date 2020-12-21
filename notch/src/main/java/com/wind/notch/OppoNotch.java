@@ -12,13 +12,25 @@ class OppoNotch extends AndroidNotch{
 
     @Override
     public boolean isNotch(Activity activity) {
-
+        boolean notch=false;
         if (Build.VERSION.SDK_INT<=Build.VERSION_CODES.O){
-            return activity.getPackageManager().
-                    hasSystemFeature("com.oppo.feature.screen.heteromorphism");
+            notch= oppoNotch(activity);
 
         }else {
-            return super.isNotch(activity);
+            notch= super.isNotch(activity);
+            if (!notch){
+                notch= oppoNotch(activity);
+            }
         }
+        return notch;
+    }
+
+    public boolean oppoNotch(Activity activity){
+
+        return activity.getPackageManager().
+                hasSystemFeature("com.oppo.feature.screen.heteromorphism");
+
+
     }
 }
+
