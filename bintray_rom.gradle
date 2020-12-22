@@ -1,0 +1,95 @@
+apply plugin: 'com.jfrog.bintray'
+apply plugin: 'com.github.dcendents.android-maven'
+
+def baseUrl = 'https://github.com/yqyzxd/ui-notch'
+def siteUrl = baseUrl
+def gitUrl = 'https://github.com/yqyzxd/ui-notch.git'
+
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+
+task javadoc(type: Javadoc) {
+    source = android.sourceSets.main.java.srcDirs
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+}
+
+/*task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}*/
+artifacts {
+    // archives javadocJar
+    archives sourcesJar
+}
+group = 'com.wind'
+version = '1.0.0'
+install {
+    repositories {
+        mavenInstaller {
+            pom.project {
+                packaging 'aar'
+                groupId 'com.wind'
+                artifactId 'rom-detector'
+               // version '1.0.0'
+
+                name 'rom-detector'
+                description 'detect android rom'
+                url siteUrl
+                inceptionYear '2020'
+
+                licenses {
+                    license {
+                        name 'The Apache Software License, Version 2.0'
+                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+
+                developers {
+                    developer {
+                        name 'yqyzxd'
+                        email 'shihaowind@163.com'
+                    }
+                }
+                scm {
+                    connection siteUrl + ".git"
+                    url baseUrl
+                }
+
+            }
+        }
+    }
+}
+
+
+bintray {
+    user = 'yqyzxd'
+    key = '7111b40cc96f58430ceac2891dcf8fc52d6fdc1f'
+    publish = true
+    configurations = ['archives']
+
+    pkg {
+        repo = 'maven'
+        name = 'rom-detector' // 上传到jcenter 的项目名称
+        vcsUrl = gitUrl
+        desc = 'detect android rom' // 项目描述
+
+        websiteUrl = siteUrl
+
+
+        //labels = ['rom', 'detect']
+
+        licenses = ['Apache-2.0']
+        issueTrackerUrl = baseUrl+"/issues"
+        publicDownloadNumbers = true
+        version {
+            name = '1.0.0'
+        }
+    }
+}
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
+
+
