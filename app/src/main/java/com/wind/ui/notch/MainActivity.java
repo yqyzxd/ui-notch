@@ -15,7 +15,6 @@ import androidx.core.app.ActivityCompat;
 
 import com.bumptech.glide.Glide;
 import com.wind.notch.Notchs;
-import com.wind.rom.detector.Rom;
 
 public class MainActivity extends AppCompatActivity {
     @Override
